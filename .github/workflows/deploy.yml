@@ -51,21 +51,17 @@ jobs:
 
       - name: Commit and Push Updates
         shell: pwsh
+        continue-on-error: true
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Verifica se houveram alterações no banco de dados ou no servidor compilado
-          $changes = git status --porcelain
-          if ($changes) {
+          git add src/data/database.ts bin/server.exe
+          $staged = git diff --cached --name-only
+          if ($staged) {
             Write-Host "Novas atualizações regulatórias ou binário compilado encontrados! Enviando..."
-            git add src/data/database.ts bin/server.exe
             git commit -m "auto: atualização de normas (Python) e servidor compilado (Rust) [scraped]"
             git push
-            if ($LASTEXITCODE -ne 0) {
-              Write-Warning "Nao foi possivel atualizar a branch main (Workflow permissions). Prosseguindo com o deploy..."
-              exit 0
-            }
           } else {
             Write-Host "Nenhuma alteração detectada nas legislações ou binários hoje."
           }
