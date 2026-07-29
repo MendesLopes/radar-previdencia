@@ -16,7 +16,7 @@ const THEME_KEY = 'radar_theme';
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [legislations, setLegislations] = useState<LegislationItem[]>([]);
+  const [legislations, setLegislations] = useState<LegislationItem[]>(DEFAULT_LEGISLATIONS);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'details' | 'diff'>('details');
 
@@ -213,10 +213,7 @@ export default function Home() {
 
   const selectedItem = legislations.find(item => item.id === selectedId) || null;
 
-  // Previne renderização incompatível no SSR
-  if (!mounted) {
-    return <div style={{ background: 'var(--bg-main)', minHeight: '100vh' }}></div>;
-  }
+
 
   // Render do Modal de Alertas
   const renderAlertModal = () => {
