@@ -1,28 +1,24 @@
 @echo off
-title Radar Previdenciário - Servidor Rust
+title Radar Previdenciário - Servidor Local
 echo ========================================================
-echo   INICIANDO SERVIDOR COMPILADO EM RUST (OFFLINE)
+echo   INICIANDO SERVIDOR LOCAL (OFFLINE)
 echo ========================================================
 echo.
 
-if not exist bin\server.exe (
-    echo [AVISO] O servidor compilado 'bin\server.exe' ainda nao existe localmente.
+if exist bin\server.exe (
+    echo [INFO] Iniciando servidor compilado em Rust...
+    echo Servidor iniciando em: http://localhost:8080
     echo.
-    echo Ele sera gerado automaticamente pelo GitHub Actions assim que voce enviar
-    echo o codigo. Apos o envio, execute um "git pull" para baixar os binarios prontos!
+    timeout /t 2 /nobreak >nul
+    start http://localhost:8080
+    bin\server.exe
+) else (
+    echo [INFO] Servidor compilado em Rust ainda nao foi baixado.
+    echo [INFO] Usando o servidor local em PowerShell como alternativa...
+    echo Servidor iniciando em: http://localhost:8080
     echo.
-    pause
-    exit
+    timeout /t 2 /nobreak >nul
+    powershell -NoProfile -ExecutionPolicy Bypass -File server.ps1
 )
 
-echo Servidor iniciando em: http://localhost:8080
-echo Pressione CTRL+C nesta janela para encerrar.
-echo.
-
-:: Aguarda 2 segundos e abre o navegador
-timeout /t 2 /nobreak >nul
-start http://localhost:8080
-
-:: Executa o binário do servidor Rust
-bin\server.exe
 pause
