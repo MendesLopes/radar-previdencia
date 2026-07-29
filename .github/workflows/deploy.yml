@@ -85,8 +85,17 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: out
-          branch: gh-pages
-          clean: true
+        shell: pwsh
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          cd out
+          New-Item -ItemType File -Name ".nojekyll" -Force
+          
+          git init
+          git checkout -b gh-pages
+          git add .
+          git commit -m "deploy: GitHub Pages build [static]"
+          
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages
