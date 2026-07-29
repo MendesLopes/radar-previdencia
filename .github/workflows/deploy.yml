@@ -30,18 +30,25 @@ jobs:
       - name: Build Rust Server
         run: cargo build --release --manifest-path rust-server/Cargo.toml
 
-      - name: Build Rust Scraper (Crawler)
-        run: cargo build --release --manifest-path rust-scraper/Cargo.toml
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: Run Python Crawler
+        run: python updater.py
 
       - name: Copy Compiled Executables to Bin
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path bin
           Copy-Item -Path target/release/rust-server.exe -Destination bin/server.exe -Force
-          Copy-Item -Path target/release/rust-scraper.exe -Destination bin/crawler.exe -Force
-
-      - name: Run Compiled Rust Crawler
-        run: bin/crawler.exe
 
       - name: Commit and Push Updates
         shell: pwsh
@@ -49,12 +56,12 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Verifica se houveram alterações no banco de dados ou nos binários compilados
+          # Verifica se houveram alterações no banco de dados ou no servidor compilado
           $changes = git status --porcelain
           if ($changes) {
-            Write-Host "Novas atualizações regulatórias ou binários compilados encontrados! Enviando..."
-            git add src/data/database.ts bin/server.exe bin/crawler.exe
-            git commit -m "auto: atualização de normas (Rust) e binários compilados [scraped]"
+            Write-Host "Novas atualizações regulatórias ou binário compilado encontrados! Enviando..."
+            git add src/data/database.ts bin/server.exe
+            git commit -m "auto: atualização de normas (Python) e servidor compilado (Rust) [scraped]"
             git push
           } else {
             Write-Host "Nenhuma alteração detectada nas legislações ou binários hoje."
