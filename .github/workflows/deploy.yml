@@ -56,14 +56,18 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          git add src/data/database.ts bin/server.exe
-          $staged = git diff --cached --name-only
-          if ($staged) {
-            Write-Host "Novas atualizações regulatórias ou binário compilado encontrados! Enviando..."
-            git commit -m "auto: atualização de normas (Python) e servidor compilado (Rust) [scraped]"
-            git push
-          } else {
-            Write-Host "Nenhuma alteração detectada nas legislações ou binários hoje."
+          try {
+            git add src/data/database.ts bin/server.exe
+            $staged = git diff --cached --name-only
+            if ($staged) {
+              Write-Host "Novas atualizações regulatórias ou binário compilado encontrados! Enviando..."
+              git commit -m "auto: atualização de normas (Python) e servidor compilado (Rust) [scraped]"
+              git push
+            } else {
+              Write-Host "Nenhuma alteração detectada nas legislações ou binários hoje."
+            }
+          } catch {
+            Write-Warning "Falha na atualizacao do repositorio Git. Prosseguindo..."
           }
 
       - name: Setup Node.js
