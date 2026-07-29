@@ -47,7 +47,7 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path bin
-          Copy-Item -Path target/release/rust-server.exe -Destination bin/server.exe -Force
+          Copy-Item -Path rust-server/target/release/rust-server.exe -Destination bin/server.exe -Force
 
       - name: Commit and Push Updates
         shell: pwsh
