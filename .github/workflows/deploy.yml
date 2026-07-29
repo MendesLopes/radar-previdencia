@@ -69,6 +69,8 @@ jobs:
           } catch {
             Write-Warning "Falha na atualizacao do repositorio Git. Prosseguindo..."
           }
+          
+          exit 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
