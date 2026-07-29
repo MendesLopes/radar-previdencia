@@ -44,13 +44,13 @@ export const SidebarFilters: React.FC<SidebarFiltersProps> = ({
 
       <div className="filter-group">
         <h3 className="filter-title">🏢 Órgão Emissor</h3>
-        <div className="chip-container">
+        <div className="chip-container" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           {sources.map((src) => {
             const active = selectedSources.includes(src);
             return (
               <button
                 key={src}
-                className={`chip ${active ? 'active' : ''}`}
+                className={`filter-chip ${active ? 'active' : ''}`}
                 onClick={() => onSourceToggle(src)}
               >
                 {src}
@@ -62,13 +62,13 @@ export const SidebarFilters: React.FC<SidebarFiltersProps> = ({
 
       <div className="filter-group">
         <h3 className="filter-title">📄 Tipo de Ato</h3>
-        <div className="chip-container">
+        <div className="chip-container" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           {types.map((t) => {
             const active = selectedTypes.includes(t);
             return (
               <button
                 key={t}
-                className={`chip ${active ? 'active' : ''}`}
+                className={`filter-chip ${active ? 'active' : ''}`}
                 onClick={() => onTypeToggle(t)}
               >
                 {t}
@@ -80,13 +80,13 @@ export const SidebarFilters: React.FC<SidebarFiltersProps> = ({
 
       <div className="filter-group">
         <h3 className="filter-title">⚡ Impacto Regulatório</h3>
-        <div className="chip-container">
+        <div className="chip-container" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           {impacts.map((imp) => {
             const active = selectedImpacts.includes(imp);
             return (
               <button
                 key={imp}
-                className={`chip ${active ? 'active' : ''}`}
+                className={`filter-chip ${active ? 'active' : ''}`}
                 onClick={() => onImpactToggle(imp)}
               >
                 {imp}
@@ -108,7 +108,7 @@ export const SidebarFilters: React.FC<SidebarFiltersProps> = ({
           }}
           onClick={onClearFilters}
         >
-          Limpar Filtros
+          Limpar Filtros 🗙
         </button>
       )}
     </aside>

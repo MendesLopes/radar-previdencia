@@ -25,35 +25,40 @@ export const LegislationCard: React.FC<LegislationCardProps> = ({
   const getImpactBadgeClass = (impact: string) => {
     switch (impact) {
       case 'Alto':
-        return 'badge-danger';
+        return 'badge-impact';
       case 'Médio':
-        return 'badge-warning';
+        return 'badge-impact medio';
       case 'Baixo':
-        return 'badge-success';
+        return 'badge-impact baixo';
       default:
         return '';
     }
   };
 
+  const sourceClass = item.source.toLowerCase() === 'cnpc' ? 'badge-source cnpc' : 'badge-source';
+
   return (
     <div
-      className={`feed-card ${isActive ? 'active' : ''}`}
+      className={`legislation-card ${isActive ? 'active' : ''}`}
       onClick={onClick}
       style={{ cursor: 'pointer' }}
     >
-      <div className="feed-card-header">
-        <span className="feed-card-source">{item.source}</span>
-        <span className="feed-card-date">{formatDate(item.date)}</span>
+      <div className="card-top">
+        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+          <span className={`badge ${sourceClass}`}>{item.source}</span>
+          <span className="badge badge-type">{item.type}</span>
+        </div>
+        <span className="card-date">{formatDate(item.date)}</span>
       </div>
-      <h3 className="feed-card-title">{item.title}</h3>
-      <p className="feed-card-summary">{item.summary}</p>
-      <div className="feed-card-meta">
+      <h3 className="card-title">{item.title}</h3>
+      <p className="card-summary">{item.summary}</p>
+      <div className="card-bottom">
         <span className={`badge ${getImpactBadgeClass(item.impact)}`}>
-          Impacto {item.impact}
+          {item.impact} Impacto
         </span>
-        <div style={{ display: 'flex', gap: '0.25rem', flexWrap: 'wrap' }}>
+        <div className="card-areas">
           {item.areas.slice(0, 2).map((area) => (
-            <span key={area} className="tag">
+            <span key={area} className="area-tag">
               {area}
             </span>
           ))}

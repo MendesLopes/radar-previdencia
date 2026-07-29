@@ -38,9 +38,13 @@ export default function Home() {
     const storedTheme = localStorage.getItem(THEME_KEY) as 'light' | 'dark' | null;
     if (storedTheme) {
       setTheme(storedTheme);
-      document.documentElement.setAttribute('data-theme', storedTheme);
+      if (storedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+      } else {
+        document.body.classList.remove('dark-theme');
+      }
     } else {
-      document.documentElement.setAttribute('data-theme', 'light');
+      document.body.classList.remove('dark-theme');
     }
 
     // 2. Carrega e Mescla Base de Dados (LocalStorage Cache Bypass)
@@ -103,7 +107,11 @@ export default function Home() {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(nextTheme);
     localStorage.setItem(THEME_KEY, nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
+    if (nextTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
   };
 
   // Funções de filtro
@@ -199,9 +207,8 @@ export default function Home() {
   // Cálculo de Estatísticas
   const stats = {
     total: legislations.length,
-    cnpc: legislations.filter(item => item.source === 'CNPC').length,
-    previc: legislations.filter(item => item.source === 'PREVIC').length,
     highImpact: legislations.filter(item => item.impact === 'Alto').length,
+    newAlertsCount: newItems.length,
   };
 
   const selectedItem = legislations.find(item => item.id === selectedId) || null;
@@ -251,13 +258,13 @@ export default function Home() {
                   <span
                     className={`badge ${
                       item.impact === 'Alto'
-                        ? 'badge-danger'
+                        ? 'badge-impact'
                         : item.impact === 'Médio'
-                        ? 'badge-warning'
-                        : 'badge-success'
+                        ? 'badge-impact medio'
+                        : 'badge-impact baixo'
                     }`}
                   >
-                    Impacto {item.impact}
+                    {item.impact} Impacto
                   </span>
                 </div>
                 <h4 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.25rem' }}>
@@ -290,9 +297,8 @@ export default function Home() {
       <WelcomeCard />
       <StatsGrid
         total={stats.total}
-        cnpc={stats.cnpc}
-        previc={stats.previc}
         highImpact={stats.highImpact}
+        newAlertsCount={stats.newAlertsCount}
       />
 
       <div className="main-layout">
@@ -314,37 +320,43 @@ export default function Home() {
           }
         />
 
-        <main className="feed-container">
-          <div className="feed-header">
-            <h2>Publicações Recentes</h2>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Mostrando {filteredLegislations.length} de {legislations.length} itens
-            </span>
+        <main style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: 0 }}>
+          {/* Feed de Normas */}
+          <div>
+            <div className="feed-header">
+              <h2 className="feed-title">Atos Normativos e Resoluções</h2>
+              <span className="feed-counter">
+                {filteredLegislations.length} {filteredLegislations.length === 1 ? 'item' : 'itens'}
+              </span>
+            </div>
+
+            <div className="feed-list">
+              {filteredLegislations.length === 0 ? (
+                <div className="empty-state" style={{ padding: '3rem 1.5rem' }}>
+                  <div className="empty-state-icon">🔎</div>
+                  <h3>Nenhum resultado encontrado</h3>
+                  <p>Tente ajustar os termos de pesquisa ou remover alguns filtros para encontrar o que procura.</p>
+                </div>
+              ) : (
+                filteredLegislations.map(item => (
+                  <LegislationCard
+                    key={item.id}
+                    item={item}
+                    isActive={selectedId === item.id}
+                    onClick={() => handleSelectCard(item.id)}
+                  />
+                ))
+              )}
+            </div>
           </div>
 
-          {filteredLegislations.length === 0 ? (
-            <div className="empty-state" style={{ padding: '3rem 1.5rem' }}>
-              <div className="empty-state-icon">🔎</div>
-              <h3>Nenhum resultado encontrado</h3>
-              <p>Tente ajustar os termos de pesquisa ou remover alguns filtros para encontrar o que procura.</p>
-            </div>
-          ) : (
-            filteredLegislations.map(item => (
-              <LegislationCard
-                key={item.id}
-                item={item}
-                isActive={selectedId === item.id}
-                onClick={() => handleSelectCard(item.id)}
-              />
-            ))
-          )}
+          {/* Painel de Detalhes do Item Ativo */}
+          <DetailPanel
+            item={selectedItem}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
         </main>
-
-        <DetailPanel
-          item={selectedItem}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-        />
       </div>
 
       {renderAlertModal()}
