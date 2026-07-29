@@ -36,7 +36,10 @@ try {
         $response = $context.Response
 
         $localPath = $request.Url.LocalPath
-        if ($localPath -eq "/") { $localPath = "/index.html" }
+        if ($localPath.StartsWith("/radar-previdencia")) {
+            $localPath = $localPath.Substring(18)
+        }
+        if ($localPath -eq "" -or $localPath -eq "/") { $localPath = "/index.html" }
         
         $filePath = Join-Path $basePath $localPath
 

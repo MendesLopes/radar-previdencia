@@ -26,10 +26,15 @@ fn main() {
     for request in server.incoming_requests() {
         let url = request.url();
         // Remove query parameters se houver (ex: /index.html?v=2 -> /index.html)
-        let clean_url = url.split('?').next().unwrap_or(url);
+        let mut clean_url = url.split('?').next().unwrap_or(url);
+        
+        // Remove o prefixo do subdiretório do GitHub Pages se estiver presente
+        if clean_url.starts_with("/radar-previdencia") {
+            clean_url = &clean_url["/radar-previdencia".len()..];
+        }
         
         // Trata a rota root '/'
-        let mut file_path = if clean_url == "/" {
+        let mut file_path = if clean_url == "/" || clean_url.is_empty() {
             base_path.join("index.html")
         } else {
             // Remove o prefixo '/' para join do path
