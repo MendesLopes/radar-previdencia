@@ -2,8 +2,8 @@ name: Atualização, Compilação Rust e Deploy
 
 on:
   schedule:
-    # Executa todos os dias às 08:00 UTC (05:00 da manhã no horário de Brasília)
-    - cron: '0 8 * * *'
+    # Executa toda segunda-feira às 08:00 UTC (05:00 da manhã no horário de Brasília)
+    - cron: '0 8 * * 1'
   push:
     branches:
       - main
