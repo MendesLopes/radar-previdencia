@@ -1,0 +1,11 @@
+C:\Users\testse\.gemini\antigravity\scratch\radar-previdencia-next\rust-server\target\release\deps\ascii-1b1ead760f8085be.d: C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\lib.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_char.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_str.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_string.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\free_functions.rs
+
+C:\Users\testse\.gemini\antigravity\scratch\radar-previdencia-next\rust-server\target\release\deps\libascii-1b1ead760f8085be.rlib: C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\lib.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_char.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_str.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_string.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\free_functions.rs
+
+C:\Users\testse\.gemini\antigravity\scratch\radar-previdencia-next\rust-server\target\release\deps\libascii-1b1ead760f8085be.rmeta: C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\lib.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_char.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_str.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_string.rs C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\free_functions.rs
+
+C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\lib.rs:
+C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_char.rs:
+C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_str.rs:
+C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\ascii_string.rs:
+C:\Users\testse\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ascii-1.1.0\src\free_functions.rs:
