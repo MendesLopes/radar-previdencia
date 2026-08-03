@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[97367,["/radar-previdencia/_next/static/chunks/158myu8e_yme3.js"],"ViewportBoundary"]
+3:I[97367,["/radar-previdencia/_next/static/chunks/158myu8e_yme3.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[27201,["/radar-previdencia/_next/static/chunks/158myu8e_yme3.js"],"IconMark"]
+0:{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Radar Previdenciário - Previdência Complementar"}],["$","meta","1",{"name":"description","content":"Painel de Consolidação e Monitoramento de Alterações Regulatórias para EFPCs."}],["$","link","2",{"rel":"icon","href":"/radar-previdencia/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L5","3",{}]]}]}]}],null]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"GVIgu9eKnJ1hxCpbH2Y_Y"}
